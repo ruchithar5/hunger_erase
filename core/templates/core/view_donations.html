@@ -1,0 +1,102 @@
+{% extends 'core/base.html' %}
+
+{% block extra_css %}
+<style>
+  .share-button {
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+
+  @media screen and (max-width: 768px) {
+    table thead {
+      display: none;
+    }
+
+    table tbody td {
+      display: block;
+      text-align: right;
+      padding-left: 50%;
+      position: relative;
+    }
+
+    table tbody td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 50%;
+      padding-left: 1rem;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    td img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-center text-info mb-4">All Food Donations</h2>
+  {% if donations %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover shadow-sm align-middle">
+        <thead class="table-info text-center">
+          <tr>
+            <th>#</th>
+            <th>Photo</th>
+            <th>Donor</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for donation in donations %}
+          <tr class="text-center">
+            <td data-label="#"> {{ forloop.counter }} </td>
+            <td data-label="Photo">
+              {% if donation.photo %}
+                <img src="{{ donation.photo.url }}" alt="Food Image" width="80" height="80" style="object-fit: cover; border-radius: 8px;">
+              {% else %}
+                <img src="https://via.placeholder.com/80x80?text=No+Image" alt="No Photo" class="img-thumbnail">
+              {% endif %}
+            </td>
+            <td data-label="Donor">{{ donation.donor.username }}</td>
+            <td data-label="Description">{{ donation.food_description }}</td>
+            <td data-label="Quantity">{{ donation.quantity }}</td>
+            <td data-label="Address">{{ donation.pickup_address }}</td>
+            <td data-label="Contact">{{ donation.contact_number }}</td>
+            <td data-label="Date">{{ donation.created_at|date:"Y-m-d H:i" }}</td>
+            <td data-label="Status">
+              {% if donation.picked_by_ngo %}
+                <span class="badge bg-success">Picked</span>
+              {% else %}
+                <span class="badge bg-warning text-dark">Pending</span><br>
+                {% if user.is_staff %}
+                  <a href="{% url 'mark_as_picked' donation.id %}" class="btn btn-sm btn-outline-success mt-1">Mark as Picked</a>
+                {% endif %}
+              {% endif %}
+              
+              <!-- Social share button -->
+              <a class="btn btn-sm btn-outline-primary share-button"
+                 href="https://wa.me/?text=Food%20Donation%20by%20{{ donation.donor.username }}%3A%20{{ donation.food_description|urlencode }}%20-%20Quantity%3A%20{{ donation.quantity|urlencode }}%20Location%3A%20{{ donation.pickup_address|urlencode }}%20http://127.0.0.1:8000/"
+                 target="_blank">
+                Share 🔗
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-info text-center">No donations available yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

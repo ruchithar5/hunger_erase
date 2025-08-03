@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 600px;">
+    <h2 class="mb-4 text-center">Volunteer Signup</h2>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <div class="mb-3">
+            {{ form.full_name.label_tag }}
+            {{ form.full_name }}
+            {{ form.full_name.errors }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {{ form.email.errors }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.phone_number.label_tag }}
+            {{ form.phone_number }}
+            {{ form.phone_number.errors }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.availability.label_tag }}
+            {{ form.availability }}
+            {{ form.availability.errors }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.areas_of_interest.label_tag }}
+            {{ form.areas_of_interest }}
+            {{ form.areas_of_interest.errors }}
+        </div>
+
+       
+        <button type="submit" class="btn btn-success w-100">Sign Up</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'core/base.html' %}
+
+{% block extra_css %}
+<!-- Bootstrap Icons for Social Media Buttons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+<style>
+    body {
+        background-image: url('https://i.ibb.co/KjrQgVQf/homepage-image.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .container {
+        background-color: rgba(255, 255, 255, 0.3);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        color: #000000;
+        font-weight: 700;
+    }
+
+    .container p.lead {
+        color: #000000;
+        font-weight: 700;
+    }
+
+    .container h1.display-4 {
+        color: #000000;
+        font-weight: 900;
+    }
+
+    .container h3 {
+        font-weight: 700;
+        color: #000000 !important;
+    }
+
+    .bg-light {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .btn {
+        font-weight: 700;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container text-center my-5">
+    <img src="https://img.icons8.com/ios-filled/50/4caf50/helping-hand.png" alt="icon" class="mb-3">
+    <h1 class="display-4 fw-bold text-success">Hunger Erase</h1>
+    <p class="lead">Connecting surplus food with those who need it most. Join us in the fight against hunger and food waste.</p>
+    
+    <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+        <a href="{% url 'donate' %}" class="btn btn-warning btn-lg shadow">🍱 Donate Food</a>
+        <a href="{% url 'view_donations' %}" class="btn btn-outline-success btn-lg shadow">📄 View Donations (NGOs)</a>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="p-4 bg-light rounded shadow-sm mb-4">
+                <h3 class="text-success">🍽 Reduce Waste</h3>
+                <p>Share your leftover food instead of letting it go to waste.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-light rounded shadow-sm mb-4">
+                <h3 class="text-warning">🤝 Help Communities</h3>
+                <p>Your donation directly supports local NGOs and people in need.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-light rounded shadow-sm mb-4">
+                <h3 class="text-primary">⚡ Easy & Quick</h3>
+                <p>Quickly list your food items and connect with organizations.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Sharing Section -->
+    <div class="mt-5">
+        <h5 class="text-dark">📢 Spread the Word</h5>
+        <p>Let others know about Hunger Erase:</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="https://api.whatsapp.com/send?text=Check%20out%20Hunger%20Erase%20to%20donate%20leftover%20food!%20http://127.0.0.1:8000/" target="_blank" class="btn btn-success btn-sm">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+            </a>
+            <a href="https://twitter.com/intent/tweet?text=Donate%20food%20via%20Hunger%20Erase%20and%20fight%20hunger!%20http://127.0.0.1:8000/" target="_blank" class="btn btn-primary btn-sm">
+                <i class="bi bi-twitter"></i> Twitter
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/" target="_blank" class="btn btn-info btn-sm text-white">
+                <i class="bi bi-facebook"></i> Facebook
+            </a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-success">Delivery Dashboard</h2>
+  <p>Here are the food donations ready for delivery:</p>
+  <ul class="list-group">
+    {% for donation in donations %}
+      <li class="list-group-item">
+        <strong>Description:</strong> {{ donation.food_description }}<br>
+        <strong>Quantity:</strong> {{ donation.quantity }}<br>
+        <strong>Pickup Address:</strong> {{ donation.pickup_address }}
+      </li>
+    {% empty %}
+      <li class="list-group-item">No donations ready for delivery.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
